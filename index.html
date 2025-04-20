@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Mon Site Informatique</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0c10;
+      --text: #ffffff;
+      --accent: #1f8eed;
+      --accent2: #f38b2c;
+    }
+
+    body.light-mode {
+      --bg: #f4f4f4;
+      --text: #1a1a1a;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text);
+      background-color: var(--bg);
+      transition: 0.3s;
+      position: relative;
+      z-index: 0;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: url('geek template.jpeg') no-repeat center center fixed;
+      background-size: cover;
+      z-index: -1;
+      opacity: 1;
+      filter: brightness(0.4) blur(10px);
+    }
+
+    header {
+      background: rgba(0, 0, 0, 0.85);
+      padding: 20px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+      animation: slideDown 0.6s ease-out forwards;
+    }
+
+    header.light-mode {
+      background: rgba(255, 255, 255, 0.85);
+    }
+
+    header .logo, header nav a {
+      color: var(--text);
+    }
+
+    body.light-mode header .logo, body.light-mode header nav a {
+      color: #1a1a1a;
+    }
+
+    @keyframes slideDown {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .logo {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+
+    nav {
+      display: flex;
+      gap: 15px;
+    }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    .toggle-mode {
+      cursor: pointer;
+      font-size: 1.2em;
+      margin-left: 15px;
+      padding: 10px 15px;
+      border-radius: 5px;
+      background-color: var(--accent);
+      color: white;
+      transition: 0.3s;
+    }
+
+    body.light-mode .toggle-mode {
+      background-color: var(--text);
+      color: var(--bg);
+    }
+
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+      color: white;
+    }
+
+    .hero h1 {
+      font-size: 3.5em;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 10px #000;
+    }
+
+    .hero p {
+      font-size: 1.3em;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 8px #000;
+    }
+
+    .buttons a {
+      text-decoration: none;
+      margin: 0 10px;
+      padding: 15px 30px;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .btn-download {
+      background: var(--accent);
+      color: white;
+    }
+
+    .btn-store {
+      background: var(--accent2);
+      color: white;
+    }
+
+    .btn-logiciels {
+      background: var(--accent2);
+      color: white;
+    }
+
+    .btn-torrent {
+      background: var(--accent);
+      color: white;
+    }
+
+    .btn-torrent:hover, .btn-logiciels:hover {
+      opacity: 0.9;
+      transform: scale(1.05);
+    }
+
+    .buttons a:hover {
+      opacity: 0.9;
+      transform: scale(1.05);
+    }
+
+    section {
+      padding: 80px 20px;
+      max-width: 1000px;
+      margin: auto;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s ease;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    section h2 {
+      font-size: 2.2em;
+      margin-bottom: 20px;
+      color: var(--accent);
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid #333;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.03);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #111;
+      color: #ccc;
+    }
+
+    .software-list {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .software-list h2 {
+      font-size: 2em;
+      margin-bottom: 20px;
+      color: var(--accent);
+    }
+
+    .software-card {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid #333;
+      margin: 10px;
+      display: inline-block;
+      width: 200px;
+    }
+
+    .software-card h3 {
+      font-size: 1.5em;
+      margin-bottom: 10px;
+    }
+
+    .software-card p {
+      font-size: 1.1em;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">🖥️ INFORMATIQUE+</div>
+  <nav>
+    <a href="#presentation">Moi</a>
+    <a href="#windows">Windows</a>
+    <a href="#materiel">Matériel</a>
+    <a href="#logiciels">Logiciels</a>
+    <a href="torrent.html">Torrent</a> <!-- Nouveau bouton ici -->
+    <a href="#contact">Contact</a>
+    <span class="toggle-mode" onclick="toggleMode()">🌓</span>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>INFORMATIQUE MODERNE</h1>
+  <p>Plonge dans l'univers de Windows et des composants PC</p>
+  <div class="buttons">
+    <a href="#windows" class="btn-download">Explorer</a>
+    <a href="#contact" class="btn-store">Contact</a>
+    <a href="logiciels.html" class="btn-logiciels">Logiciels</a>
+    <a href="torrent.html" class="btn-torrent">Torrent</a> <!-- Nouveau bouton ici -->
+  </div>
+</section>
+
+<section id="presentation">
+  <h2>👤 Présentation</h2>
+  <div class="card">
+    <p>Salut ! Je suis un passionné d'informatique. J'adore démonter des PC, explorer Windows, installer des logiciels utiles, et aider les gens à mieux comprendre leur machine. Bienvenue sur mon site ! 😎</p>
+  </div>
+</section>
+
+<section id="windows">
+  <h2>🪟 Windows</h2>
+  <div class="card">
+    <p>Windows est le système d’exploitation le plus utilisé. Sur ce site, tu trouveras des astuces, tutoriels et conseils pour maîtriser Windows 10, 11 et plus.</p>
+  </div>
+</section>
+
+<section id="materiel">
+  <h2>💻 Composants PC</h2>
+  <div class="card">
+    <p>Découvre les éléments clés d’un PC : carte mère, processeur, RAM, carte graphique, SSD… Je t’explique leur rôle et comment bien choisir ton setup.</p>
+  </div>
+</section>
+
+<section id="logiciels">
+  <div class="software-list">
+    <h2>💻 Logiciels Recommandés</h2>
+    <div class="software-card">
+      <h3>WinRAR</h3>
+      <p>Un logiciel pour compresser et décompresser des fichiers.</p>
+    </div>
+    <div class="software-card">
+      <h3>7-Zip</h3>
+      <p>Un outil gratuit pour la compression de fichiers en différents formats.</p>
+    </div>
+    <div class="software-card">
+      <h3>CCleaner</h3>
+      <p>Un logiciel pour nettoyer ton PC et optimiser ses performances.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>📬 Contact</h2>
+  <div class="card">
+    <p>Une question ? Un problème ? Tu peux me contacter par mail à <strong>informatiqueplus@gmx.us</strong> ou via mes réseaux !</p>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2025 Informatique + - Tous droits réservés</p>
+</footer>
+
+<script>
+  function toggleMode() {
+    document.body.classList.toggle('light-mode');
+    document.querySelector('header').classList.toggle('light-mode');
+  }
+
+  const sections = document.querySelectorAll("section");
+
+  function revealOnScroll() {
+    const trigger = window.innerHeight * 0.85;
+    sections.forEach(section => {
+      const top = section.getBoundingClientRect().top;
+      if (top < trigger) {
+        section.classList.add("visible");
+      }
+    });
+  }
+
+  window.addEventListener("scroll", revealOnScroll);
+  window.addEventListener("load", revealOnScroll);
+</script>
+
+</body>
+</html>
