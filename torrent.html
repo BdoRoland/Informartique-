@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Torrent - Mon Site Informatique</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0c10;
+      --text: #ffffff;
+      --accent: #1f8eed;
+      --accent2: #f38b2c;
+    }
+
+    body.light-mode {
+      --bg: #f4f4f4;
+      --text: #1a1a1a;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text);
+      background-color: var(--bg);
+      transition: 0.3s;
+      position: relative;
+      z-index: 0;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: url('geek template.jpeg') no-repeat center center fixed;
+      background-size: cover;
+      z-index: -1;
+      opacity: 1;
+      filter: brightness(0.4) blur(10px);
+    }
+
+    header {
+      background: rgba(0, 0, 0, 0.85);
+      padding: 20px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+      animation: slideDown 0.6s ease-out forwards;
+    }
+
+    header.light-mode {
+      background: rgba(255, 255, 255, 0.85);
+    }
+
+    header .logo, header nav a {
+      color: var(--text);
+    }
+
+    body.light-mode header .logo, body.light-mode header nav a {
+      color: #1a1a1a;
+    }
+
+    @keyframes slideDown {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .logo {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+
+    nav {
+      display: flex;
+      gap: 15px;
+    }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    .toggle-mode {
+      cursor: pointer;
+      font-size: 1.2em;
+      margin-left: 15px;
+      padding: 10px 15px;
+      border-radius: 5px;
+      background-color: var(--accent);
+      color: white;
+      transition: 0.3s;
+    }
+
+    body.light-mode .toggle-mode {
+      background-color: var(--text);
+      color: var(--bg);
+    }
+
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+      color: white;
+    }
+
+    .hero h1 {
+      font-size: 3.5em;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 10px #000;
+    }
+
+    .hero p {
+      font-size: 1.3em;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 8px #000;
+    }
+
+    .buttons a {
+      text-decoration: none;
+      margin: 0 10px;
+      padding: 15px 30px;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .btn-torrent {
+      background: var(--accent2);
+      color: white;
+    }
+
+    .btn-torrent:hover {
+      opacity: 0.9;
+      transform: scale(1.05);
+    }
+
+    .buttons a:hover {
+      opacity: 0.9;
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #111;
+      color: #ccc;
+    }
+
+    .warning-text {
+      font-style: italic;
+      color: #aaa;
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      font-size: 0.9em;
+      z-index: 9999;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 10px;
+      border-radius: 5px;
+      max-width: 300px;
+      text-align: right;
+    }
+
+    /* Style pour les liens */
+    .torrent-links {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      opacity: 0;
+      animation: fadeInLinks 1s forwards;
+    }
+
+    .torrent-links a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 1.1em;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .torrent-links a:hover {
+      color: #ff6347;
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeInLinks {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Style pour la popup */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8); /* Fond noir */
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+    }
+
+    .popup-content {
+      background-color: #222; /* Fond noir pour la popup */
+      color: #fff; /* Texte en blanc */
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      max-width: 500px;
+      width: 80%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .popup a {
+      text-decoration: none;
+      padding: 10px 20px;
+      margin: 10px;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .popup .btn-accept {
+      background-color: #1f8eed;
+      color: white;
+    }
+
+    .popup .btn-close {
+      background-color: red;
+      color: white;
+    }
+
+    .popup .btn-accept, .popup .btn-close {
+      margin-top: 20px;
+    }
+
+    /* Ajustement pour le bouton "Retour à l'accueil" */
+    .buttons {
+      margin-top: 60px;
+    }
+
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">🖥️ INFORMATIQUE+</div>
+  <nav>
+    <a href="index.html#presentation">Moi</a>
+    <a href="index.html#windows">Windows</a>
+    <a href="index.html#materiel">Matériel</a>
+    <a href="index.html#logiciels">Logiciels</a>
+    <a href="index.html#contact">Contact</a>
+    <span class="toggle-mode" onclick="toggleMode()">🌓</span>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Torrent</h1>
+  <p class="typewriter"></p> <!-- Retiré le texte en dur ici -->
+  <div class="torrent-links">
+    <a href="#" onclick="openPopup('https://www.thepiratebay10.xyz')">The Pirate Bay</a>
+    <a href="#" onclick="openPopup('https://1337x.to')">1337x</a>
+    <a href="#" onclick="openPopup('https://rarbg.to')">RARBG</a>
+    <a href="#" onclick="openPopup('https://yts.mx')">YTS</a>
+    <a href="#" onclick="openPopup('https://torrentz2eu.in')">Torrentz2</a>
+    <a href="#" onclick="openPopup('https://lime-torrents.io')">LimeTorrents</a>
+    <a href="#" onclick="openPopup('https://torrentdownloads.me')">TorrentDownloads</a>
+  </div>
+  <div class="buttons">
+    <a href="index.html" class="btn-torrent">Retour à l'accueil</a>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2025 Informatique + - Tous droits réservés</p>
+</footer>
+
+<!-- Text d'avertissement en bas à droite -->
+<div class="warning-text">
+  L'utilisation des sites de téléchargement référencés sur cette page est à vos risques et périls. Nous ne sommes en aucun cas responsables des conséquences juridiques liées au téléchargement illégal. Assurez-vous de respecter les lois en vigueur dans votre pays. L'accès à ces ressources se fait sous votre propre responsabilité.
+</div>
+
+<!-- Popup -->
+<div class="popup" id="popup">
+  <div class="popup-content">
+    <p>Attention, nous ne sommes pas responsables de l'usage que vous faites de ces sites.</p>
+    <a href="#" class="btn-accept" id="btn-accept" onclick="accessSite()">Accéder</a>
+    <a href="index.html" class="btn-close">Retour à l'accueil</a>
+  </div>
+</div>
+
+<script>
+  function toggleMode() {
+    document.body.classList.toggle('light-mode');
+    document.querySelector('header').classList.toggle('light-mode');
+  }
+
+  // Typewriter effect
+  let i = 0;
+  const text = "Découvrez des torrents recommandés pour les logiciels et outils informatiques";
+  const speed = 100; // milliseconds
+  const typewriter = document.querySelector('.typewriter');
+
+  function type() {
+    if (i < text.length) {
+      typewriter.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(type, speed);
+    }
+  }
+
+  window.onload = type;
+
+  // Fonction pour afficher la popup
+  function openPopup(url) {
+    document.getElementById('popup').style.display = 'flex';
+    document.getElementById('btn-accept').setAttribute('onclick', 'accessSite("' + url + '")');
+  }
+
+  // Fonction pour accéder au site après avoir accepté
+  function accessSite(url) {
+    window.open(url, '_blank');
+    document.getElementById('popup').style.display = 'none';
+  }
+
+  // Fonction pour fermer la popup
+  document.querySelector('.btn-close').addEventListener('click', function() {
+    document.getElementById('popup').style.display = 'none';
+  });
+
+</script>
+
+</body>
+</html>

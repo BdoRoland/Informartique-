@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Logiciels - Informatique+</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Century Gothic', sans-serif;
+      background-image: url('xp.jpg'); /* image de fond locale */
+      background-size: cover;
+      background-position: center;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      animation: fadeIn 1s ease-out;
+    }
+
+    .container {
+      background-color: rgba(0, 0, 0, 0.6); /* Fond semi-transparent */
+      padding: 40px;
+      border-radius: 15px;
+      text-align: center;
+      max-width: 800px;
+      width: 90%;
+      color: white;
+    }
+
+    h1 {
+      color: #1f8eed;
+      animation: slideIn 1s ease-out;
+    }
+
+    a {
+      color: #f38b2c;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: #1f8eed;
+    }
+
+    ul {
+      margin-top: 20px;
+      padding: 0;
+      list-style: none;
+      animation: fadeInUp 1.5s ease-out;
+    }
+
+    li {
+      margin: 10px 0;
+      opacity: 0;
+      animation: fadeInUp 1s ease-out forwards;
+      animation-delay: 1s;
+    }
+
+    li:nth-child(1) { animation-delay: 1.5s; }
+    li:nth-child(2) { animation-delay: 2s; }
+    li:nth-child(3) { animation-delay: 2.5s; }
+    li:nth-child(4) { animation-delay: 3s; }
+    li:nth-child(5) { animation-delay: 3.5s; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideIn {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .gif-container {
+      margin-bottom: 20px;
+    }
+
+    .gif-container img {
+      width: 50%;
+      max-width: 400px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="gif-container">
+      <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNWZnbXkwZ2gyN2tubGZ5b2FobWt1bGtmYXljYXlhZzNucmU5YnNyNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/YyKPbc5OOTSQE/giphy.gif" alt="Error 404 GIF">
+    </div>
+
+    <h1>📦 Logiciels recommandés</h1>
+    <p>Voici une liste de logiciels utiles pour ton PC :</p>
+    <ul>
+      <li><strong>WinRAR</strong> – Compression/décompression : <a href="https://www.win-rar.com/start.html?&L=10" target="_blank">Télécharger</a></li>
+      <li><strong>7-Zip</strong> – Gratuit et open-source : <a href="https://www.7-zip.org/" target="_blank">Télécharger</a></li>
+      <li><strong>VLC</strong> – Lecteur média universel : <a href="https://www.videolan.org/vlc/" target="_blank">Télécharger</a></li>
+      <li><strong>Google Chrome</strong> – Navigateur web : <a href="https://www.google.com/chrome/" target="_blank">Télécharger</a></li>
+      <li><strong>Malwarebytes</strong> – Protection contre les menaces : <a href="https://www.malwarebytes.com/" target="_blank">Télécharger</a></li>
+    </ul>
+
+    <p><a href="index.html">← Retour à l'accueil</a></p>
+  </div>
+</body>
+</html>
